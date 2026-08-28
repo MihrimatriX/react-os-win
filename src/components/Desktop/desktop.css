@@ -1,0 +1,152 @@
+.desktop-area {
+  width: 100vw;
+  height: calc(100dvh - var(--taskbar-height));
+  background-size: cover;
+  background-position: center;
+  position: relative; /* ponytail: anchor absolute windows to desktop, not outer shell */
+  overflow: hidden;
+  transition: background-image 0.5s ease;
+}
+
+.desktop-icons-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.desktop-icon-wrapper {
+  width: 96px;
+  height: 106px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border-radius: 4px;
+  border: 1px solid transparent;
+  padding: 4px;
+  cursor: default;
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    left 0.15s ease,
+    top 0.15s ease;
+}
+
+.desktop-icon-wrapper.dragging {
+  transition: none;
+  opacity: 0.8;
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.desktop-icon-wrapper:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+[data-theme="light"] .desktop-icon-wrapper:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+  border-color: rgba(0, 0, 0, 0.08);
+}
+
+.desktop-icon-wrapper.selected {
+  background-color: rgba(0, 120, 212, 0.18);
+  border-color: rgba(0, 120, 212, 0.35);
+}
+
+.desktop-icon-wrapper.selected:hover {
+  background-color: rgba(0, 120, 212, 0.25);
+  border-color: rgba(0, 120, 212, 0.45);
+}
+
+[data-theme="light"] .desktop-icon-wrapper.selected {
+  background-color: rgba(0, 120, 212, 0.12);
+  border-color: rgba(0, 120, 212, 0.3);
+}
+
+.desktop-icon-visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 6px;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.25));
+}
+
+.desktop-web-shortcut-icon {
+  width: 46px;
+  height: 46px;
+  position: relative;
+  display: grid;
+  place-items: center;
+}
+
+.desktop-web-shortcut-icon > img {
+  position: absolute;
+  inset: 5px;
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+  border-radius: 9px;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+}
+
+.desktop-shortcut-badge {
+  position: absolute;
+  right: -1px;
+  bottom: -1px;
+  width: 17px;
+  height: 17px;
+  display: grid;
+  place-items: center;
+  color: #0b5cab;
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+}
+
+.desktop-icon-label {
+  font-size: 11.5px;
+  color: #ffffff;
+  font-weight: 400;
+  text-shadow: 0 1.5px 3px rgba(0, 0, 0, 0.85);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  word-break: break-word;
+  line-height: 1.2;
+}
+
+[data-theme="light"] .desktop-icon-label {
+  /* Keep it white with high text-shadow so it remains legible even on light wallpapers! That's standard OS behavior. */
+  text-shadow: 0 1.5px 3px rgba(0, 0, 0, 0.85);
+}
+
+.desktop-selection-marquee {
+  background-color: rgba(0, 120, 212, 0.18);
+  border: 1px solid rgba(0, 120, 212, 0.45);
+  pointer-events: none;
+  z-index: 99;
+}
+
+.desktop-area.refreshing .desktop-icon-wrapper {
+  animation: desktop-refresh-anim 0.3s ease;
+}
+
+@keyframes desktop-refresh-anim {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.1;
+    transform: scale(0.97);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

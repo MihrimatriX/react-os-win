@@ -1,0 +1,448 @@
+.widgets-panel-container {
+  position: absolute;
+  bottom: calc(var(--taskbar-height) + 12px);
+  left: 12px;
+  width: min(380px, calc(100vw - 24px));
+  max-height: calc(100dvh - var(--taskbar-height) - 24px);
+  border-radius: 12px;
+  padding: 20px;
+  z-index: 999998;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
+  animation: widgetsSlideIn 0.3s cubic-bezier(0.1, 0.9, 0.2, 1);
+  border: 1px solid var(--border-color);
+  overflow-y: auto;
+}
+
+@keyframes widgetsSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.widgets-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 18px;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 10px;
+}
+
+.widgets-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-color);
+}
+
+.widgets-date {
+  font-size: 11.5px;
+  color: var(--text-muted);
+}
+
+.widgets-grid-content {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Individual Widget Cards */
+.widget-card {
+  border-radius: 8px;
+  padding: 12px 14px;
+  border: 1px solid var(--border-color);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+[data-theme="light"] .widget-card {
+  background: rgba(0, 0, 0, 0.02);
+}
+
+/* Search Box Widget */
+.search-widget {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+}
+
+.search-widget-icon {
+  opacity: 0.65;
+  color: var(--text-color);
+}
+
+.search-widget-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 12.5px;
+  color: var(--text-color);
+}
+
+.search-widget-input::placeholder {
+  color: var(--text-muted);
+}
+
+/* Alarm Trigger Banner */
+.alarm-triggered-banner {
+  background: rgba(232, 17, 35, 0.15);
+  border: 1px solid rgba(232, 17, 35, 0.35);
+  border-radius: 8px;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  animation: pulseAlarm 1.5s infinite alternate;
+  z-index: 10;
+}
+
+@keyframes pulseAlarm {
+  from {
+    box-shadow: 0 0 4px rgba(232, 17, 35, 0.2);
+  }
+  to {
+    box-shadow: 0 0 12px rgba(232, 17, 35, 0.5);
+  }
+}
+
+.alarm-alert-icon {
+  color: #ff3b30;
+}
+
+.alarm-banner-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.3;
+}
+
+.alarm-banner-text strong {
+  font-size: 12.5px;
+  color: var(--text-color);
+}
+
+.alarm-banner-text span {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.alarm-stop-btn {
+  background: #e81123;
+  color: #ffffff;
+  border: none;
+  padding: 5px 12px;
+  font-size: 11.5px;
+  border-radius: 4px;
+  font-weight: 600;
+  cursor: default;
+}
+
+.alarm-stop-btn:hover {
+  background: #b71c1c;
+}
+
+/* Weather Widget */
+.weather-widget {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.weather-widget-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.weather-main-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.weather-city {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+.weather-status {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.weather-temp {
+  font-size: 32px;
+  font-weight: 300;
+  line-height: 1;
+  color: var(--text-color);
+}
+
+.weather-widget-details {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 8px;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 6px;
+  padding: 8px;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.02);
+}
+
+.detail-label {
+  font-size: 10px;
+  color: var(--text-muted);
+  display: block;
+}
+
+.detail-val {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+.weather-forecast-list {
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid var(--border-color);
+  padding-top: 10px;
+}
+
+.forecast-day {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  color: var(--text-color);
+}
+
+/* Alarm & Clock Widget */
+.alarm-widget {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.alarm-widget-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.alarm-clock-icon {
+  color: var(--accent-color);
+}
+
+.alarm-widget-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+.alarm-current-time {
+  font-size: 24px;
+  font-weight: 700;
+  font-family: monospace;
+  color: var(--text-color);
+  text-align: center;
+  padding: 5px 0;
+}
+
+.alarm-settings-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.03);
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+}
+
+.alarm-time-inputs {
+  display: flex;
+  align-items: center;
+}
+
+.alarm-input {
+  width: 32px;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  color: var(--text-color);
+  text-align: center;
+  font-size: 13.5px;
+  padding: 3px 0;
+  font-weight: 600;
+  outline: none;
+}
+
+[data-theme="light"] .alarm-input {
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.alarm-colon {
+  margin: 0 4px;
+  font-weight: bold;
+  color: var(--text-color);
+}
+
+.alarm-switch-label {
+  display: flex;
+  align-items: center;
+  cursor: default;
+}
+
+.alarm-toggle-checkbox {
+  display: none;
+}
+
+.alarm-toggle-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  padding: 4px 10px;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--text-color);
+  transition: all 0.15s;
+}
+
+.alarm-toggle-checkbox:checked + .alarm-toggle-btn {
+  background: var(--accent-color);
+  border-color: var(--accent-light);
+  color: #ffffff;
+}
+
+/* Finance Stocks Widget */
+.finance-widget {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.finance-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.finance-icon {
+  color: #4cd964;
+}
+
+.finance-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+.finance-rates-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 8px;
+}
+
+.finance-rate-item {
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 6px;
+  padding: 8px 10px;
+  border: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.finance-rate-name {
+  font-size: 10.5px;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.finance-rate-values {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.rate-value {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-color);
+}
+
+.rate-change {
+  font-size: 10px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+}
+
+.rate-change.up {
+  color: #4cd964;
+}
+
+.rate-change.down {
+  color: #ff3b30;
+}
+
+/* News Widget */
+.news-widget {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.news-widget-header {
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 6px;
+}
+
+.news-title {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+.news-articles-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.news-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.news-source {
+  font-size: 9.5px;
+  font-weight: 700;
+  color: var(--accent-color);
+  text-transform: uppercase;
+}
+
+.news-headline {
+  font-size: 11.5px;
+  line-height: 1.3;
+  color: var(--text-color);
+}
+
+@media (max-width: 420px) {
+  .widgets-panel-container {
+    left: 12px;
+    padding: 16px;
+  }
+
+  .widgets-date {
+    max-width: 150px;
+    text-align: right;
+  }
+}

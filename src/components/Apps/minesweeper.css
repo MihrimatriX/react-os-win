@@ -1,0 +1,197 @@
+.mines-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  background-color: #e6e6e6;
+  color: #333;
+  padding: 15px;
+  box-sizing: border-box;
+  font-family: Tahoma, Arial, sans-serif;
+  user-select: none;
+}
+
+[data-theme="dark"] .mines-container {
+  background-color: #1e1e1e;
+  color: #fff;
+}
+
+/* 1. Minesweeper Outer Frame */
+.mines-frame {
+  border: 3px solid #f5f5f5;
+  border-right-color: #808080;
+  border-bottom-color: #808080;
+  background-color: #bdbdbd;
+  padding: 8px;
+  border-radius: 4px;
+}
+
+[data-theme="dark"] .mines-frame {
+  border-color: #2b2b2b;
+  border-right-color: #111;
+  border-bottom-color: #111;
+  background-color: #333;
+}
+
+/* 2. Minesweeper Digital Header Dashboard */
+.mines-dashboard {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #bdbdbd;
+  border: 3px solid #808080;
+  border-right-color: #f5f5f5;
+  border-bottom-color: #f5f5f5;
+  padding: 6px 12px;
+  margin-bottom: 8px;
+  gap: 12px;
+}
+
+[data-theme="dark"] .mines-dashboard {
+  background-color: #333;
+  border-color: #111;
+  border-right-color: #444;
+  border-bottom-color: #444;
+}
+
+/* Digital LED Display */
+.mines-led-display {
+  background-color: #000;
+  color: #ff0000;
+  font-family: monospace;
+  font-size: 22px;
+  font-weight: bold;
+  padding: 2px 8px;
+  border-radius: 3px;
+  border: 1px solid #555;
+  min-width: 48px;
+  text-align: right;
+  letter-spacing: 1px;
+}
+
+/* Smiley Restart Button */
+.mines-smiley-btn {
+  width: 36px;
+  height: 36px;
+  font-size: 20px;
+  border: 3px solid #f5f5f5;
+  border-right-color: #808080;
+  border-bottom-color: #808080;
+  background-color: #bdbdbd;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  outline: none;
+  border-radius: 4px;
+  transition: active 0.1s ease;
+}
+
+.mines-smiley-btn:active {
+  border: 3px solid #808080;
+  border-right-color: #f5f5f5;
+  border-bottom-color: #f5f5f5;
+  padding-top: 2px;
+  padding-left: 2px;
+}
+
+/* 3. Game Play Cells Grid */
+.mines-grid-box {
+  border: 3px solid #808080;
+  border-right-color: #f5f5f5;
+  border-bottom-color: #f5f5f5;
+  background-color: #7b7b7b;
+}
+
+[data-theme="dark"] .mines-grid-box {
+  border-color: #111;
+  border-right-color: #444;
+  border-bottom-color: #444;
+}
+
+.mines-grid {
+  display: grid;
+  grid-template-columns: repeat(9, 32px);
+  grid-template-rows: repeat(9, 32px);
+  gap: 1px;
+  background-color: #7b7b7b;
+}
+
+/* Minesweeper individual cell */
+.mines-cell {
+  width: 32px;
+  height: 32px;
+  background-color: #bdbdbd;
+  border: 3px solid #f5f5f5;
+  border-right-color: #808080;
+  border-bottom-color: #808080;
+  font-weight: bold;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+[data-theme="dark"] .mines-cell {
+  background-color: #444;
+  border-color: #555;
+  border-right-color: #222;
+  border-bottom-color: #222;
+}
+
+/* revealed state */
+.mines-cell.revealed {
+  background-color: #c0c0c0;
+  border: 1px solid #7b7b7b;
+  padding: 0;
+}
+
+[data-theme="dark"] .mines-cell.revealed {
+  background-color: #2d2d2d;
+  border-color: #1e1e1e;
+}
+
+/* Number cell colors */
+.mines-cell[data-num="1"] {
+  color: #0000ff;
+}
+.mines-cell[data-num="2"] {
+  color: #008000;
+}
+.mines-cell[data-num="3"] {
+  color: #ff0000;
+}
+.mines-cell[data-num="4"] {
+  color: #000080;
+}
+.mines-cell[data-num="5"] {
+  color: #800000;
+}
+.mines-cell[data-num="6"] {
+  color: #008080;
+}
+.mines-cell[data-num="7"] {
+  color: #000000;
+}
+.mines-cell[data-num="8"] {
+  color: #808080;
+}
+
+/* cell state: mine exploded */
+.mines-cell.exploded {
+  background-color: #ff0000 !important;
+  border: 1px solid #ff0000 !important;
+}
+
+.mines-cell.wrong-flag {
+  position: relative;
+}
+.mines-cell.wrong-flag::after {
+  content: "❌";
+  position: absolute;
+  font-size: 10px;
+}

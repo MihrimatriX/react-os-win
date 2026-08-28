@@ -1,0 +1,13 @@
+services:
+  web:
+    build: .
+    container_name: afu-react-os-win
+    ports:
+      - "2423:80"
+    restart: unless-stopped
+    networks:
+      - proxy-network
+
+networks:
+  proxy-network:
+    external: true

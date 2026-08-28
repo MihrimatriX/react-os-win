@@ -1,0 +1,247 @@
+.paint-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  background-color: var(--bg-color-solid);
+  color: var(--text-color);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  user-select: none;
+}
+
+[data-theme="dark"] .paint-container {
+  background-color: var(--bg-color-solid);
+  color: var(--text-color);
+}
+
+/* 1. Paint Menu / Tool Bar */
+.paint-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 16px;
+  background-color: #ffffff;
+  border-bottom: 1px solid #e0e0e0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  z-index: 10;
+}
+
+[data-theme="dark"] .paint-toolbar {
+  background-color: #2b2b2b;
+  border-bottom: 1px solid #3c3c3c;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.paint-tool-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border-right: 1px solid #e0e0e0;
+  padding-right: 12px;
+}
+
+[data-theme="dark"] .paint-tool-group {
+  border-right: 1px solid #3c3c3c;
+}
+
+.paint-tool-group:last-child {
+  border-right: none;
+  padding-right: 0;
+}
+
+.paint-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.paint-btn:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="dark"] .paint-btn:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+.paint-btn.active {
+  background-color: #e0f2fe;
+  border-color: #7dd3fc;
+  color: #0284c7;
+}
+
+[data-theme="dark"] .paint-btn.active {
+  background-color: rgba(2, 132, 199, 0.2);
+  border-color: #0284c7;
+  color: #38bdf8;
+}
+
+/* Color wells */
+.paint-color-palette {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 4px;
+}
+
+.paint-color-dot {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  transition: transform 0.1s ease;
+  position: relative;
+}
+
+.paint-color-dot:hover {
+  transform: scale(1.2);
+}
+
+.paint-color-dot.active {
+  transform: scale(1.15);
+  box-shadow: 0 0 0 2px var(--accent-color, #0078d4);
+  border-color: #fff;
+}
+
+/* Active indicator color preview */
+.paint-color-preview-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  position: relative;
+}
+
+.paint-size-select {
+  padding: 4px 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  color: #333;
+  font-size: 12px;
+  outline: none;
+  cursor: pointer;
+}
+
+[data-theme="dark"] .paint-size-select {
+  background-color: #3c3c3c;
+  border-color: #555;
+  color: #fff;
+}
+
+/* 2. Drawing Area Frame */
+.paint-workspace {
+  flex: 1;
+  position: relative;
+  overflow: auto;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.canvas-wrapper {
+  background-color: #ffffff;
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  position: relative;
+}
+
+[data-theme="dark"] .canvas-wrapper {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+}
+
+.paint-canvas {
+  display: block;
+  cursor: crosshair;
+  background-color: #ffffff;
+  border-radius: 4px;
+}
+
+/* 3. Text/Name Save Modal overlay */
+.paint-save-modal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.paint-modal-content {
+  width: 300px;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.paint-modal-title {
+  margin-top: 0;
+  margin-bottom: 12px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.paint-modal-input {
+  width: 100%;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  margin-bottom: 15px;
+  outline: none;
+  font-size: 13px;
+}
+
+[data-theme="dark"] .paint-modal-input {
+  background-color: #2b2b2b;
+  border-color: #444;
+  color: #fff;
+}
+
+.paint-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.paint-modal-btn {
+  padding: 6px 16px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background: #fff;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+[data-theme="dark"] .paint-modal-btn {
+  background: #333;
+  border-color: #444;
+  color: #fff;
+}
+
+.paint-modal-btn.primary {
+  background-color: #0078d4;
+  color: #fff;
+  border-color: #0078d4;
+}
+
+.paint-modal-btn.primary:hover {
+  background-color: #005a9e;
+}

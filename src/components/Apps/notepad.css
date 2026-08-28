@@ -1,0 +1,193 @@
+.notepad-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  background: var(--bg-color-solid);
+  position: relative;
+}
+
+.notepad-menu-bar {
+  height: 32px;
+  background: rgba(0, 0, 0, 0.03);
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  gap: 8px;
+}
+
+[data-theme="dark"] .notepad-menu-bar {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.menu-bar-btn {
+  background: transparent;
+  border: none;
+  font-size: 12px;
+  color: var(--text-color);
+  cursor: default;
+  display: flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: 4px;
+  transition: background-color 0.15s;
+}
+
+.menu-bar-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="light"] .menu-bar-btn:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.notepad-file-title-indicator {
+  margin-left: auto;
+  font-size: 11.5px;
+  color: var(--text-muted);
+}
+
+.notepad-textarea {
+  flex: 1;
+  width: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: var(--text-color);
+  font-family: Consolas, "Courier New", monospace;
+  font-size: 14px;
+  padding: 15px;
+  resize: none;
+  line-height: 1.5;
+}
+
+/* Save Modal Dialog Overlay */
+.save-modal-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+  animation: fadeIn 0.2s ease-out;
+}
+
+.save-modal {
+  width: 320px;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.3);
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.save-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 8px;
+}
+
+.save-modal-header h3 {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+.save-modal-close {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  cursor: default;
+  display: flex;
+  align-items: center;
+}
+
+.save-modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.save-input-row {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.save-input-row label {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.save-input-row input {
+  padding: 8px 12px;
+  border-radius: 4px;
+  border: 1px solid var(--border-color);
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-color);
+  font-size: 13px;
+  outline: none;
+}
+
+.save-input-row input:focus {
+  border-color: var(--accent-color);
+}
+
+.save-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.save-modal-actions button {
+  padding: 6px 15px;
+  font-size: 12.5px;
+  font-weight: 500;
+  border-radius: 4px;
+  cursor: default;
+}
+
+.btn-cancel {
+  background: transparent;
+  border: 1px solid var(--border-color);
+  color: var(--text-color);
+}
+
+.btn-cancel:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.btn-save {
+  background: var(--accent-color);
+  color: #fff;
+  border: none;
+}
+
+.btn-save:hover {
+  background: var(--accent-light);
+}
+
+.notepad-save-toast {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  background: var(--accent-color);
+  color: #ffffff;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-size: 12.5px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  animation: fadeIn 0.2s ease-out;
+  pointer-events: none;
+  z-index: 1000;
+}

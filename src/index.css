@@ -1,0 +1,238 @@
+:root {
+  /* Fonts */
+  --font-family:
+    "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial,
+    sans-serif;
+
+  /* Theme Defaults (Light Theme) */
+  --bg-color: rgba(243, 243, 243, 0.8);
+  --bg-color-solid: #ffffff;
+  --bg-active: rgba(255, 255, 255, 0.9);
+  --text-color: #1c1c1c;
+  --text-muted: #616161;
+  --border-color: rgba(0, 0, 0, 0.08);
+  --border-glow: rgba(255, 255, 255, 0.4);
+  --glass-bg: rgba(255, 255, 255, 0.56);
+  --glass-border: rgba(255, 255, 255, 0.45);
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.08);
+  --selection: rgba(0, 120, 212, 0.2);
+  --accent-color: #0078d4;
+  --accent-light: #50a6ff;
+  --accent-dark: #005a9e;
+
+  /* Sizes and Positions */
+  --taskbar-height: 48px;
+  --window-border-radius: 12px;
+
+  /* MSI BIOS variables */
+  --bios-bg: #000000;
+  --bios-text: #ffffff;
+  --bios-red: #ff0000;
+}
+
+[data-theme="dark"] {
+  /* Dark Theme */
+  --bg-color: rgba(28, 28, 28, 0.82);
+  --bg-color-solid: #1e1e1e;
+  --bg-active: rgba(45, 45, 45, 0.9);
+  --text-color: #ffffff;
+  --text-muted: #b0b0b0;
+  --border-color: rgba(255, 255, 255, 0.08);
+  --border-glow: rgba(0, 0, 0, 0.3);
+  --glass-bg: rgba(32, 32, 32, 0.65);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.25);
+  --selection: rgba(255, 255, 255, 0.15);
+  --accent-color: #60cdff;
+  --accent-light: #9ddbff;
+  --accent-dark: #0078d4;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+body {
+  font-family: var(--font-family);
+  color: var(--text-color);
+  overflow: hidden;
+  height: 100dvh;
+  width: 100vw;
+  background-color: #000;
+}
+
+input,
+textarea,
+[contenteditable="true"] {
+  user-select: text;
+  -webkit-user-drag: auto;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+:where(button, input, textarea, select, [tabindex]):focus-visible {
+  outline: 2px solid var(--accent-light);
+  outline-offset: 2px;
+}
+
+.screen-brightness-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2000000;
+  pointer-events: none;
+  background: #000;
+  transition: opacity 140ms ease;
+}
+
+/* Glassmorphism Styles */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(35px) saturate(160%);
+  -webkit-backdrop-filter: blur(35px) saturate(160%);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+}
+
+.glass-interactive {
+  transition:
+    background-color 0.2s,
+    border-color 0.2s,
+    box-shadow 0.2s;
+}
+
+.glass-interactive:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+[data-theme="light"] .glass-interactive:hover {
+  background: rgba(0, 0, 0, 0.05);
+  border-color: rgba(0, 0, 0, 0.1);
+}
+
+/* Scrollbar styles */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(128, 128, 128, 0.3);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(128, 128, 128, 0.5);
+}
+
+/* Windows Utility Styles */
+.win-btn {
+  background: transparent;
+  border: none;
+  outline: none;
+  cursor: default;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-color);
+}
+
+.win-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="light"] .win-btn:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.win-btn:active {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+[data-theme="light"] .win-btn:active {
+  background: rgba(0, 0, 0, 0.02);
+}
+
+/* Animations */
+@keyframes startMenuSlideUp {
+  from {
+    transform: translate(-50%, 15px) scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: translate(-50%, 0) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes panelSlideUp {
+  from {
+    transform: translateY(15px) scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes windowOpen {
+  from {
+    transform: scale(0.97);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+[data-energy-saver] *,
+[data-energy-saver] *::before,
+[data-energy-saver] *::after {
+  animation-duration: 1ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 1ms !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+  }
+}

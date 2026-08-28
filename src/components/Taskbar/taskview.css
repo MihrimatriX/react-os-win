@@ -1,0 +1,187 @@
+.task-view-backdrop {
+  position: fixed;
+  inset: 0 0 var(--taskbar-height);
+  z-index: 999990;
+  display: grid;
+  place-items: center;
+  padding: clamp(20px, 5vw, 72px);
+  background: rgba(7, 12, 22, 0.58);
+  backdrop-filter: blur(18px) saturate(120%);
+  -webkit-backdrop-filter: blur(18px) saturate(120%);
+  animation: taskViewFade 160ms ease-out;
+}
+
+.task-view-panel {
+  width: min(1120px, 100%);
+  max-height: min(720px, 88dvh);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: clamp(18px, 2.5vw, 30px);
+  color: var(--text-color);
+  background: color-mix(in srgb, var(--bg-color-solid) 74%, transparent);
+  border: 1px solid var(--glass-border);
+  border-radius: 22px;
+  box-shadow: 0 28px 80px rgba(0, 0, 0, 0.38);
+  outline: none;
+}
+
+.task-view-header,
+.task-view-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.task-view-header h2 {
+  margin-top: 3px;
+  font-size: clamp(19px, 2vw, 26px);
+  font-weight: 600;
+}
+
+.task-view-eyebrow,
+.task-view-footer {
+  color: var(--text-muted);
+  font-size: 12px;
+}
+
+.task-view-close,
+.task-view-card-close {
+  display: grid;
+  place-items: center;
+  border: 0;
+  color: var(--text-color);
+  background: transparent;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.task-view-close {
+  width: 36px;
+  height: 36px;
+}
+
+.task-view-close:hover,
+.task-view-card-close:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.task-view-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
+  gap: 16px;
+  overflow: auto;
+  padding: 3px;
+}
+
+.task-view-card {
+  position: relative;
+  min-width: 0;
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.055);
+  transition: transform 140ms ease, border-color 140ms ease,
+    background-color 140ms ease;
+}
+
+.task-view-card:hover,
+.task-view-card.active {
+  transform: translateY(-2px);
+  border-color: color-mix(in srgb, var(--accent-color) 68%, transparent);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.task-view-card.minimized {
+  opacity: 0.78;
+}
+
+.task-view-card-main {
+  width: 100%;
+  padding: 12px;
+  border: 0;
+  color: inherit;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+}
+
+.task-view-preview {
+  min-height: 128px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  border-radius: 10px;
+  color: var(--text-muted);
+  font-size: 11px;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.16));
+}
+
+.task-view-card-title {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-top: 11px;
+  padding-right: 30px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.task-view-card-title > span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.task-view-card-close {
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
+  width: 28px;
+  height: 28px;
+}
+
+.task-view-empty {
+  min-height: 250px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.task-view-empty strong {
+  color: var(--text-color);
+  font-size: 16px;
+}
+
+.task-view-footer {
+  padding-top: 14px;
+  border-top: 1px solid var(--border-color);
+}
+
+@keyframes taskViewFade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@media (max-width: 640px) {
+  .task-view-backdrop {
+    padding: 12px;
+  }
+
+  .task-view-panel {
+    max-height: calc(100dvh - var(--taskbar-height) - 24px);
+    padding: 16px;
+    border-radius: 16px;
+  }
+
+  .task-view-footer span:first-child {
+    display: none;
+  }
+}
