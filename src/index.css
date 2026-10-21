@@ -1,0 +1,369 @@
+:root {
+  /* Fonts — Segoe UI Variable first (Win11 Fluent) */
+  --font-family:
+    "Segoe UI Variable", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto,
+    Helvetica, Arial, sans-serif;
+
+  /* Theme Defaults (Light Theme) */
+  --bg-color: rgba(243, 243, 243, 0.85);
+  --bg-color-solid: #f3f3f3;
+  --bg-active: rgba(255, 255, 255, 0.92);
+  --text-color: #1c1c1c;
+  --text-muted: #5d5d5d;
+  --border-color: rgba(0, 0, 0, 0.06);
+  --border-glow: rgba(255, 255, 255, 0.5);
+  --glass-bg: rgba(252, 252, 252, 0.82);
+  --glass-border: rgba(255, 255, 255, 0.55);
+  --glass-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.12),
+    0 2px 6px rgba(0, 0, 0, 0.06);
+  --selection: rgba(0, 120, 212, 0.22);
+  --accent-color: #0078d4;
+  --accent-light: #60aaff;
+  --accent-dark: #005a9e;
+
+  /* Fluent radii & density */
+  --control-corner-radius: 4px;
+  --overlay-corner-radius: 8px;
+  --flyout-corner-radius: 12px;
+  --list-row-height: 36px;
+
+  /* Mica / Acrylic */
+  --mica-bg: rgba(243, 243, 243, 0.88);
+  --acrylic-bg: rgba(249, 249, 249, 0.88);
+  --mica-blur: blur(60px) saturate(140%);
+  --acrylic-blur: blur(40px) saturate(175%);
+  --flyout-shadow:
+    0 14px 40px rgba(0, 0, 0, 0.18),
+    0 4px 12px rgba(0, 0, 0, 0.08),
+    0 0 0 1px rgba(0, 0, 0, 0.05);
+
+  /* Hover / press surfaces */
+  --subtle-fill: rgba(0, 0, 0, 0.037);
+  --subtle-fill-hover: rgba(0, 0, 0, 0.057);
+  --subtle-fill-pressed: rgba(0, 0, 0, 0.092);
+  --subtle-fill-selected: rgba(0, 0, 0, 0.07);
+
+  /* Sizes and Positions */
+  --taskbar-height: 48px;
+  --window-border-radius: 8px;
+
+  /* MSI BIOS variables */
+  --bios-bg: #000000;
+  --bios-text: #ffffff;
+  --bios-red: #ff0000;
+}
+
+[data-theme="dark"] {
+  --bg-color: rgba(32, 32, 32, 0.84);
+  --bg-color-solid: #202020;
+  --bg-active: rgba(45, 45, 45, 0.92);
+  --text-color: #ffffff;
+  --text-muted: #adadad;
+  --border-color: rgba(255, 255, 255, 0.07);
+  --border-glow: rgba(0, 0, 0, 0.35);
+  --glass-bg: rgba(32, 32, 32, 0.86);
+  --glass-border: rgba(255, 255, 255, 0.09);
+  --glass-shadow:
+    0 14px 40px rgba(0, 0, 0, 0.48),
+    0 4px 12px rgba(0, 0, 0, 0.28);
+  --selection: rgba(255, 255, 255, 0.14);
+  --accent-color: #60cdff;
+  --accent-light: #9ddbff;
+  --accent-dark: #0078d4;
+
+  --mica-bg: rgba(32, 32, 32, 0.9);
+  --acrylic-bg: rgba(44, 44, 44, 0.88);
+  --flyout-shadow:
+    0 14px 40px rgba(0, 0, 0, 0.55),
+    0 4px 14px rgba(0, 0, 0, 0.35),
+    0 0 0 1px rgba(255, 255, 255, 0.06);
+
+  --subtle-fill: rgba(255, 255, 255, 0.06);
+  --subtle-fill-hover: rgba(255, 255, 255, 0.09);
+  --subtle-fill-pressed: rgba(255, 255, 255, 0.12);
+  --subtle-fill-selected: rgba(255, 255, 255, 0.11);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+body {
+  font-family: var(--font-family);
+  color: var(--text-color);
+  overflow: hidden;
+  height: 100dvh;
+  width: 100vw;
+  background-color: #000;
+  font-feature-settings: "kern" 1;
+  -webkit-font-smoothing: antialiased;
+}
+
+input,
+textarea,
+[contenteditable="true"] {
+  user-select: text;
+  -webkit-user-drag: auto;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+:where(button, input, textarea, select, [tabindex]):focus-visible {
+  outline: 2px solid var(--accent-light);
+  outline-offset: 2px;
+}
+
+.screen-brightness-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2000000;
+  pointer-events: none;
+  background: #000;
+  transition: opacity 140ms ease;
+}
+
+/* Acrylic / Mica glass surfaces */
+.glass {
+  background: var(--acrylic-bg);
+  backdrop-filter: var(--acrylic-blur);
+  -webkit-backdrop-filter: var(--acrylic-blur);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--flyout-shadow);
+}
+
+.mica {
+  background: var(--mica-bg);
+  backdrop-filter: var(--mica-blur);
+  -webkit-backdrop-filter: var(--mica-blur);
+  border: 1px solid var(--glass-border);
+}
+
+.glass-interactive {
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.glass-interactive:hover {
+  background: var(--subtle-fill-hover);
+}
+
+.glass-interactive:active {
+  background: var(--subtle-fill-pressed);
+}
+
+/* Scrollbar — thin Win11 style */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(128, 128, 128, 0.35);
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(128, 128, 128, 0.55);
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+/* Windows Utility Styles */
+.win-btn {
+  background: transparent;
+  border: none;
+  outline: none;
+  cursor: default;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-color);
+  border-radius: var(--control-corner-radius);
+  transition: background-color 0.12s ease;
+}
+
+.win-btn:hover {
+  background: var(--subtle-fill-hover);
+}
+
+.win-btn:active {
+  background: var(--subtle-fill-pressed);
+}
+
+/* Animations */
+@keyframes startMenuSlideUp {
+  from {
+    transform: translate(-50%, 12px) scale(0.97);
+    opacity: 0;
+  }
+  to {
+    transform: translate(-50%, 0) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes panelSlideUp {
+  from {
+    transform: translateY(12px) scale(0.97);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes windowOpen {
+  from {
+    transform: scale(0.98);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+[data-energy-saver] *,
+[data-energy-saver] *::before,
+[data-energy-saver] *::after {
+  animation-duration: 1ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 1ms !important;
+}
+
+[data-energy-saver] .win-loader-container .spinner-dot {
+  animation-name: win11-boot-orbit !important;
+  animation-duration: 2.6s !important;
+  animation-iteration-count: infinite !important;
+  transition-duration: 0s !important;
+}
+[data-energy-saver] .win-loader-container .win-logo {
+  animation-name: fadeIn !important;
+  animation-duration: 1.8s !important;
+  animation-iteration-count: 1 !important;
+  animation-fill-mode: forwards !important;
+  transition-duration: 0s !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+  }
+
+  /* Keep Win11 boot dots visible/animated for product fidelity. */
+  .win-loader-container .spinner-dot {
+    animation-name: win11-boot-orbit !important;
+    animation-duration: 2.6s !important;
+    animation-iteration-count: infinite !important;
+    transition-duration: 0s !important;
+  }
+  .win-loader-container .win-logo {
+    animation-name: fadeIn !important;
+    animation-duration: 1.8s !important;
+    animation-iteration-count: 1 !important;
+    animation-fill-mode: forwards !important;
+    transition-duration: 0s !important;
+  }
+
+  /* Keep live wallpaper soft-motion under OS reduce-motion (Canlı choice). */
+  .live-wallpaper:not(.live-wallpaper--paused) .live-wallpaper-blob--a {
+    animation-name: live-blob-a !important;
+    animation-duration: 28s !important;
+    animation-iteration-count: infinite !important;
+    animation-direction: alternate !important;
+    transition-duration: 0s !important;
+  }
+  .live-wallpaper:not(.live-wallpaper--paused) .live-wallpaper-blob--b {
+    animation-name: live-blob-b !important;
+    animation-duration: 34s !important;
+    animation-iteration-count: infinite !important;
+    animation-direction: alternate !important;
+    transition-duration: 0s !important;
+  }
+  .live-wallpaper:not(.live-wallpaper--paused) .live-wallpaper-blob--c {
+    animation-name: live-blob-c !important;
+    animation-duration: 30s !important;
+    animation-iteration-count: infinite !important;
+    animation-direction: alternate !important;
+    transition-duration: 0s !important;
+  }
+  .live-wallpaper:not(.live-wallpaper--paused) .live-wallpaper-blob--d {
+    animation-name: live-blob-d !important;
+    animation-duration: 36s !important;
+    animation-iteration-count: infinite !important;
+    animation-direction: alternate !important;
+    transition-duration: 0s !important;
+  }
+  .live-wallpaper:not(.live-wallpaper--paused) .live-wallpaper-blob--e {
+    animation-name: live-blob-e !important;
+    animation-duration: 26s !important;
+    animation-iteration-count: infinite !important;
+    animation-direction: alternate !important;
+    transition-duration: 0s !important;
+  }
+  .live-wallpaper:not(.live-wallpaper--paused) .live-wallpaper-sheen {
+    animation-name: live-sheen !important;
+    animation-duration: 40s !important;
+    animation-iteration-count: infinite !important;
+    animation-direction: alternate !important;
+    transition-duration: 0s !important;
+  }
+  .live-wallpaper:not(.live-wallpaper--paused) .live-wallpaper-canvas {
+    display: block !important;
+  }
+}
+
+.app-loading-fallback,
+.app-missing {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  min-height: 120px;
+  color: var(--text-color);
+  opacity: 0.75;
+  font-size: 13px;
+}

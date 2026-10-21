@@ -1,0 +1,407 @@
+﻿.start-menu-container {
+  position: absolute;
+  bottom: calc(var(--taskbar-height) + 12px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(640px, calc(100vw - 24px));
+  height: min(700px, calc(100dvh - var(--taskbar-height) - 24px));
+  border-radius: var(--flyout-corner-radius);
+  display: flex;
+  flex-direction: column;
+  z-index: 999998;
+  padding: 28px 28px 0;
+  box-shadow: var(--flyout-shadow);
+  animation: startMenuSlideUp 0.28s cubic-bezier(0.1, 0.9, 0.2, 1);
+  border: 1px solid var(--glass-border);
+  overflow: hidden;
+  background: var(--acrylic-bg);
+  backdrop-filter: var(--acrylic-blur);
+  -webkit-backdrop-filter: var(--acrylic-blur);
+}
+
+/* Search Bar — Win11 Fluent */
+.start-search-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-bottom: 2px solid var(--accent-color);
+  border-radius: var(--overlay-corner-radius);
+  padding: 10px 14px;
+  margin-bottom: 22px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+[data-theme="dark"] .start-search-bar {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow: none;
+}
+
+.start-search-icon {
+  opacity: 0.7;
+  color: var(--text-color);
+  flex-shrink: 0;
+}
+
+.start-search-bar input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--text-color);
+  font-size: 14px;
+  font-family: var(--font-family);
+}
+
+.start-search-bar input::placeholder {
+  color: var(--text-muted);
+}
+
+/* Sections */
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-color);
+  margin-bottom: 12px;
+  padding: 0 8px;
+  letter-spacing: 0.01em;
+}
+
+.all-apps-btn {
+  background: var(--subtle-fill);
+  border: 1px solid var(--border-color);
+  border-radius: var(--control-corner-radius);
+  font-size: 12px;
+  font-weight: 500;
+  padding: 5px 10px;
+  color: var(--text-color);
+  cursor: default;
+  transition: background-color 0.12s ease;
+}
+
+.all-apps-btn:hover {
+  background: var(--subtle-fill-hover);
+}
+
+.all-apps-btn:active {
+  background: var(--subtle-fill-pressed);
+}
+
+/* Grid of Pinned Apps */
+.pinned-apps-section {
+  flex: 1.2;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.apps-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-gap: 4px 2px;
+  max-height: 220px;
+  overflow-y: auto;
+  padding: 0 2px;
+}
+
+.apps-grid.all-apps-grid {
+  max-height: calc(100% - 38px);
+}
+
+.grid-app-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: center;
+  border-radius: var(--overlay-corner-radius);
+  padding: 10px 6px 8px;
+  cursor: default;
+  transition:
+    background-color 0.12s ease,
+    transform 0.1s ease;
+  min-width: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+}
+
+.grid-app-item:hover {
+  background-color: var(--subtle-fill-hover);
+}
+
+.grid-app-item:active {
+  transform: scale(0.96);
+  background-color: var(--subtle-fill-pressed);
+}
+
+.grid-app-icon {
+  margin-bottom: 6px;
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.14))
+    drop-shadow(0 2px 6px rgba(0, 0, 0, 0.18));
+}
+
+.grid-app-icon img {
+  display: block;
+  object-fit: contain;
+}
+
+.grid-app-name {
+  font-size: 12px;
+  color: var(--text-color);
+  word-break: break-word;
+  line-height: 1.25;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.no-results {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 13px;
+  margin-top: 30px;
+}
+
+/* Recommended Section */
+.recommended-section {
+  flex: 1;
+  border-top: 1px solid var(--border-color);
+  padding-top: 18px;
+  min-height: 0;
+}
+
+.recent-files-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 4px 10px;
+}
+
+.recent-file-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 10px;
+  min-height: var(--list-row-height);
+  border-radius: var(--overlay-corner-radius);
+  cursor: default;
+  transition: background-color 0.12s ease;
+  width: 100%;
+  min-width: 0;
+  border: 0;
+  background: transparent;
+  text-align: left;
+}
+
+.recent-file-item:hover {
+  background-color: var(--subtle-fill-hover);
+}
+
+.recent-file-item:active {
+  background-color: var(--subtle-fill-pressed);
+}
+
+.recent-file-details {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.recent-file-name {
+  font-size: 13px;
+  color: var(--text-color);
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.recent-file-time {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.no-recent {
+  grid-column: span 2;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 13px;
+  margin-top: 15px;
+}
+
+/* Footer — mica strip */
+.start-menu-footer {
+  height: 64px;
+  border-top: 1px solid var(--border-color);
+  margin: 16px -28px 0;
+  background: color-mix(in srgb, var(--mica-bg) 88%, transparent);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 28px;
+  flex-shrink: 0;
+}
+
+[data-theme="light"] .start-menu-footer {
+  background: rgba(0, 0, 0, 0.03);
+}
+
+[data-theme="dark"] .start-menu-footer {
+  background: rgba(0, 0, 0, 0.22);
+}
+
+.footer-user {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 6px 10px;
+  border: 0;
+  border-radius: var(--overlay-corner-radius);
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  transition: background-color 0.12s ease;
+}
+
+.footer-user:hover {
+  background: var(--subtle-fill-hover);
+}
+
+.footer-user:active {
+  background: var(--subtle-fill-pressed);
+}
+
+.footer-user-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid var(--border-color);
+  object-fit: cover;
+}
+
+.footer-user-name {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-color);
+}
+
+.footer-power-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-color);
+  cursor: default;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--overlay-corner-radius);
+  transition: background-color 0.12s ease;
+}
+
+.footer-power-btn:hover {
+  background-color: var(--subtle-fill-hover);
+}
+
+.footer-power-btn:active {
+  background-color: var(--subtle-fill-pressed);
+}
+
+/* Power Menu Popover */
+.power-menu-dropdown {
+  position: absolute;
+  bottom: 48px;
+  right: 0;
+  width: 180px;
+  border-radius: var(--overlay-corner-radius);
+  padding: 6px;
+  box-shadow: var(--flyout-shadow);
+  border: 1px solid var(--glass-border);
+  z-index: 1000;
+  background: var(--acrylic-bg);
+  backdrop-filter: var(--acrylic-blur);
+  -webkit-backdrop-filter: var(--acrylic-blur);
+}
+
+.power-menu-anchor {
+  position: relative;
+}
+
+.power-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  min-height: 36px;
+  border-radius: var(--control-corner-radius);
+  cursor: default;
+  font-size: 13px;
+  color: var(--text-color);
+  transition: background-color 0.12s ease;
+  width: 100%;
+  border: 0;
+  background: transparent;
+  text-align: left;
+}
+
+.power-item:hover {
+  background-color: var(--subtle-fill-hover);
+}
+
+.power-item:active {
+  background-color: var(--subtle-fill-pressed);
+}
+
+@media (max-width: 560px) {
+  .start-menu-container {
+    left: 12px;
+    right: 12px;
+    transform: none;
+    width: auto;
+    padding: 20px 20px 0;
+    animation: panelSlideUp 0.28s cubic-bezier(0.1, 0.9, 0.2, 1);
+  }
+
+  .apps-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 4px;
+  }
+
+  .recent-files-list {
+    grid-template-columns: 1fr;
+  }
+
+  .no-recent {
+    grid-column: auto;
+  }
+
+  .start-menu-footer {
+    margin: 12px -20px 0;
+    padding: 0 20px;
+  }
+}
+
+@media (max-height: 700px) {
+  .start-menu-container {
+    height: min(580px, calc(100dvh - var(--taskbar-height) - 24px));
+  }
+
+  .apps-grid {
+    max-height: 180px;
+  }
+}
+
+@media (max-height: 610px) {
+  .recommended-section {
+    display: none;
+  }
+
+  .apps-grid {
+    max-height: calc(100% - 40px);
+  }
+}

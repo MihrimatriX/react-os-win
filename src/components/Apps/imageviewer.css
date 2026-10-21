@@ -1,0 +1,165 @@
+.imageviewer-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  background-color: var(--bg-color-solid);
+  color: var(--text-color);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  overflow: hidden;
+  user-select: none;
+}
+
+/* 1. Header Toolbar Actions */
+.imageviewer-toolbar {
+  height: 40px;
+  background-color: rgba(0, 0, 0, 0.04);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  border-bottom: 1px solid var(--border-color);
+  z-index: 10;
+}
+
+[data-theme="dark"] .imageviewer-toolbar {
+  background-color: rgba(255, 255, 255, 0.03);
+}
+
+.imageviewer-title {
+  font-size: 13px;
+  font-weight: 500;
+  color: #dddddd;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 300px;
+}
+
+.imageviewer-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.imageviewer-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background-color: #2b2b2b;
+  border: 1px solid #3c3c3c;
+  color: #eeeeee;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.imageviewer-btn:hover {
+  background-color: #3d3d3d;
+  border-color: #4c4c4c;
+  color: #ffffff;
+}
+
+.imageviewer-btn:active {
+  transform: scale(0.97);
+}
+
+.imageviewer-btn.accent {
+  background-color: #0078d4;
+  border-color: #0078d4;
+  color: #ffffff;
+}
+
+.imageviewer-btn.accent:hover {
+  background-color: #005a9e;
+}
+
+/* 2. Photo Lightbox display panel */
+.imageviewer-viewport {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #181818;
+  padding: 15px;
+  position: relative;
+  overflow: auto;
+}
+
+.imageviewer-img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  border-radius: 4px;
+}
+
+/* 3. Empty / Gallery View Panel */
+.imageviewer-gallery {
+  flex: 1;
+  padding: 24px;
+  overflow-y: auto;
+  background-color: transparent;
+}
+
+.gallery-title {
+  margin-top: 0;
+  margin-bottom: 16px;
+  font-size: 16px;
+  font-weight: 600;
+  border-bottom: 1px solid #2b2b2b;
+  padding-bottom: 8px;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 16px;
+}
+
+.gallery-card {
+  background-color: #2b2b2b;
+  border-radius: 6px;
+  border: 1px solid #3c3c3c;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.gallery-card:hover {
+  transform: translateY(-2px);
+  border-color: #0078d4;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.gallery-card-thumb {
+  height: 90px;
+  background-size: cover;
+  background-position: center;
+  background-color: #181818;
+}
+
+.gallery-card-name {
+  padding: 6px 8px;
+  font-size: 11px;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: center;
+  color: #cccccc;
+}
+
+.gallery-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  color: #858585;
+  text-align: center;
+}

@@ -1,0 +1,272 @@
+[
+    {
+        "file": "folder.svg",
+        "bytes": 1803,
+        "url": "https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.305/icons/document_folder_24_color.svg",
+        "source": "fluentui document_folder_24_color"
+    },
+    {
+        "file": "folder.png",
+        "bytes": 1197,
+        "url": "https://img.icons8.com/fluency/128/folder-invoices.png",
+        "source": "icons8 fluency folder-invoices"
+    },
+    {
+        "file": "explorer.png",
+        "bytes": 2240,
+        "url": "https://img.icons8.com/fluency/128/windows-explorer.png",
+        "source": "icons8 fluency windows-explorer"
+    },
+    {
+        "file": "computer.png",
+        "bytes": 5302,
+        "url": "https://img.icons8.com/fluency/128/workstation.png",
+        "source": "icons8 fluency workstation"
+    },
+    {
+        "file": "computer.svg",
+        "bytes": 1445,
+        "url": "https://raw.githubusercontent.com/microsoft/fluentui-system-icons/main/assets/Laptop/SVG/ic_fluent_laptop_24_color.svg",
+        "source": "fluentui laptop_24_color"
+    },
+    {
+        "file": "recycle.png",
+        "bytes": 5794,
+        "url": "https://img.icons8.com/fluency/128/recycle-bin.png",
+        "source": "icons8 fluency recycle-bin"
+    },
+    {
+        "file": "chrome.svg",
+        "bytes": 1429,
+        "url": "https://upload.wikimedia.org/wikipedia/commons/e/e1/Google_Chrome_icon_%28February_2022%29.svg",
+        "source": "wikimedia Chrome Feb 2022"
+    },
+    {
+        "file": "notepad.png",
+        "bytes": 3058,
+        "url": "https://img.icons8.com/fluency/128/notepad.png",
+        "source": "icons8 fluency notepad"
+    },
+    {
+        "file": "notepad.svg",
+        "bytes": 2310,
+        "url": "https://raw.githubusercontent.com/microsoft/fluentui-system-icons/main/assets/Notebook/SVG/ic_fluent_notebook_24_color.svg",
+        "source": "fluentui notebook_24_color"
+    },
+    {
+        "file": "settings.svg",
+        "bytes": 3277,
+        "url": "https://raw.githubusercontent.com/microsoft/fluentui-system-icons/main/assets/Settings/SVG/ic_fluent_settings_48_color.svg",
+        "source": "fluentui settings_48_color"
+    },
+    {
+        "file": "calculator.png",
+        "bytes": 3671,
+        "url": "https://img.icons8.com/fluency/128/calculator.png",
+        "source": "icons8 fluency calculator"
+    },
+    {
+        "file": "terminal.png",
+        "bytes": 2283,
+        "url": "https://img.icons8.com/fluency/128/console.png",
+        "source": "icons8 fluency console"
+    },
+    {
+        "file": "paint.svg",
+        "bytes": 2078,
+        "url": "https://raw.githubusercontent.com/microsoft/fluentui-system-icons/main/assets/Paint Brush/SVG/ic_fluent_paint_brush_24_color.svg",
+        "source": "fluentui paint_brush_24_color"
+    },
+    {
+        "file": "paint.png",
+        "bytes": 3095,
+        "url": "https://img.icons8.com/fluency/128/paint.png",
+        "source": "icons8 fluency paint"
+    },
+    {
+        "file": "vscode.svg",
+        "bytes": 4426,
+        "url": "https://upload.wikimedia.org/wikipedia/commons/9/9a/Visual_Studio_Code_1.35_icon.svg",
+        "source": "wikimedia VS Code"
+    },
+    {
+        "file": "store.png",
+        "bytes": 1667,
+        "url": "https://img.icons8.com/fluency/128/microsoft-store.png",
+        "source": "icons8 fluency microsoft-store"
+    },
+    {
+        "file": "camera.svg",
+        "bytes": 2618,
+        "url": "https://raw.githubusercontent.com/microsoft/fluentui-system-icons/main/assets/Camera/SVG/ic_fluent_camera_24_color.svg",
+        "source": "fluentui camera_24_color"
+    },
+    {
+        "file": "photos.svg",
+        "bytes": 1446,
+        "url": "https://raw.githubusercontent.com/microsoft/fluentui-system-icons/main/assets/Image/SVG/ic_fluent_image_48_color.svg",
+        "source": "fluentui image_48_color"
+    },
+    {
+        "file": "photos.png",
+        "bytes": 2789,
+        "url": "https://img.icons8.com/fluency/128/photos.png",
+        "source": "icons8 fluency photos"
+    },
+    {
+        "file": "taskmgr.svg",
+        "bytes": 1782,
+        "url": "custom://react-os-win/taskmgr-win11.svg",
+        "source": "custom Win11-style task manager fluent tile (performance chart)"
+    },
+    {
+        "file": "taskmgr.png",
+        "bytes": 8761,
+        "url": "custom://react-os-win/taskmgr-win11.png",
+        "source": "custom Win11-style task manager fluent tile (rendered PNG)"
+    },
+    {
+        "file": "weather.png",
+        "bytes": 3299,
+        "url": "https://img.icons8.com/fluency/128/partly-cloudy-day.png",
+        "source": "icons8 fluency partly-cloudy-day"
+    },
+    {
+        "file": "copilot.png",
+        "bytes": 8257,
+        "url": "https://img.icons8.com/fluency/128/microsoft-copilot.png",
+        "source": "icons8 fluency microsoft-copilot"
+    },
+    {
+        "file": "copilot.svg",
+        "bytes": 3257,
+        "url": "https://raw.githubusercontent.com/microsoft/fluentui-system-icons/main/assets/Bot/SVG/ic_fluent_bot_24_color.svg",
+        "source": "fluentui bot_24_color"
+    },
+    {
+        "file": "minesweeper.png",
+        "bytes": 3311,
+        "url": "https://img.icons8.com/fluency/128/minesweeper.png",
+        "source": "icons8 fluency minesweeper"
+    },
+    {
+        "file": "fdm.png",
+        "bytes": 3830,
+        "url": "https://img.icons8.com/fluency/128/download-2.png",
+        "source": "icons8 fluency download-2"
+    },
+    {
+        "file": "torrent.svg",
+        "bytes": 1536,
+        "url": "https://raw.githubusercontent.com/qbittorrent/qBittorrent/master/src/icons/qbittorrent-tray.svg",
+        "source": "qBittorrent official tray svg"
+    },
+    {
+        "file": "bios.png",
+        "bytes": 6663,
+        "url": "https://img.icons8.com/fluency/128/motherboard.png",
+        "source": "icons8 fluency motherboard"
+    },
+    {
+        "file": "document.svg",
+        "bytes": 1291,
+        "url": "https://raw.githubusercontent.com/microsoft/fluentui-system-icons/main/assets/Document/SVG/ic_fluent_document_48_color.svg",
+        "source": "fluentui document_48_color"
+    },
+    {
+        "file": "hdd.png",
+        "bytes": 5024,
+        "url": "https://img.icons8.com/fluency/128/hdd.png",
+        "source": "icons8 fluency hdd"
+    },
+    {
+        "file": "text.png",
+        "bytes": 1779,
+        "url": "https://img.icons8.com/fluency/128/txt.png",
+        "source": "icons8 fluency txt"
+    },
+    {
+        "file": "onedrive.png",
+        "bytes": 3516,
+        "url": "https://img.icons8.com/fluency/128/microsoft-onedrive-2019.png",
+        "source": "icons8 fluency microsoft-onedrive-2019"
+    },
+    {
+        "file": "defender.png",
+        "bytes": 2120,
+        "url": "https://img.icons8.com/fluency/128/windows-defender.png",
+        "source": "icons8 fluency windows-defender"
+    },
+    {
+        "file": "discord.png",
+        "bytes": 6223,
+        "url": "https://img.icons8.com/fluency/128/discord-logo.png",
+        "source": "icons8 fluency discord-logo"
+    },
+    {
+        "file": "spotify.png",
+        "bytes": 5453,
+        "url": "https://img.icons8.com/fluency/128/spotify.png",
+        "source": "icons8 fluency spotify"
+    },
+    {
+        "file": "steam.png",
+        "bytes": 7096,
+        "url": "https://img.icons8.com/fluency/128/steam.png",
+        "source": "icons8 fluency steam"
+    },
+    {
+        "file": "projects/react-shop.svg",
+        "bytes": 267,
+        "url": "https://react-shop.ahmetfuzunkaya.com/favicon.svg",
+        "source": "KapıdaMart site favicon"
+    },
+    {
+        "file": "projects/aw-component.svg",
+        "bytes": 324,
+        "url": "https://aw-component.ahmetfuzunkaya.com/favicon.svg",
+        "source": "AW Component site favicon"
+    },
+    {
+        "file": "projects/tkm.svg",
+        "bytes": 280,
+        "url": "https://tkm.ahmetfuzunkaya.com/favicon.svg",
+        "source": "TKM / RPS Arena site favicon"
+    },
+    {
+        "file": "projects/easy-pomodoro.svg",
+        "bytes": 644,
+        "url": "https://easy-pomodoro.ahmetfuzunkaya.com/icons/icon.svg",
+        "source": "Easy Pomodoro site icon"
+    },
+    {
+        "file": "projects/vid-report.svg",
+        "bytes": 467,
+        "url": "https://vid-report.ahmetfuzunkaya.com/icon.svg",
+        "source": "Vid Report site icon"
+    },
+    {
+        "file": "projects/element-api.svg",
+        "bytes": 595,
+        "url": "https://element-api.ahmetfuzunkaya.com/favicon.svg",
+        "source": "Element API site favicon"
+    },
+    {
+        "file": "projects/spider-solitaire.svg",
+        "bytes": 455,
+        "url": "custom://react-os-win/spider-solitaire.svg",
+        "source": "custom Spider Solitaire favicon (from site theme #2d5a27)"
+    },
+    {
+        "file": "projects/rick-morty.svg",
+        "bytes": 429,
+        "url": "custom://react-os-win/rick-morty.svg",
+        "source": "custom Rick and Morty portal favicon (site theme)"
+    },
+    {
+        "file": "projects/filmrev-movie.svg",
+        "bytes": 338,
+        "url": "https://filmrev-movie.ahmetfuzunkaya.com/icon.svg",
+        "source": "Film Review site favicon"
+    }
+]

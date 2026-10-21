@@ -1,0 +1,456 @@
+/* Wallpaper Engine–style live bloom: depth parallax layers + soft particle canvas */
+
+.live-wallpaper {
+  --lw-mx: 0;
+  --lw-my: 0;
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+  isolation: isolate;
+}
+
+.live-wallpaper--desktop,
+.live-wallpaper--login {
+  position: absolute;
+  inset: 0;
+}
+
+.live-wallpaper--thumb {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+}
+
+.live-wallpaper-layer,
+.live-wallpaper-base,
+.live-wallpaper-blob,
+.live-wallpaper-vignette,
+.live-wallpaper-noise,
+.live-wallpaper-sheen,
+.live-wallpaper-canvas {
+  position: absolute;
+  inset: 0;
+}
+
+/* Parallax depth: wrapper moves with mouse; children keep independent drift */
+.live-wallpaper-layer {
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+}
+
+.live-wallpaper-layer--base {
+  transform: translate3d(
+    calc(var(--lw-mx) * 4px),
+    calc(var(--lw-my) * 3px),
+    0
+  );
+}
+
+.live-wallpaper-layer--far {
+  transform: translate3d(
+    calc(var(--lw-mx) * 7px),
+    calc(var(--lw-my) * 5px),
+    0
+  );
+}
+
+.live-wallpaper-layer--mid {
+  transform: translate3d(
+    calc(var(--lw-mx) * 12px),
+    calc(var(--lw-my) * 10px),
+    0
+  );
+}
+
+.live-wallpaper-layer--near {
+  transform: translate3d(
+    calc(var(--lw-mx) * 18px),
+    calc(var(--lw-my) * 14px),
+    0
+  );
+}
+
+.live-wallpaper-layer--sheen {
+  transform: translate3d(
+    calc(var(--lw-mx) * -10px),
+    calc(var(--lw-my) * -8px),
+    0
+  );
+}
+
+/* Dark (default): deep navy + neon cyan/magenta */
+.live-wallpaper-base {
+  background:
+    radial-gradient(120% 80% at 12% 18%, #2a6cff 0%, transparent 55%),
+    radial-gradient(90% 70% at 88% 12%, #c026ff 0%, transparent 50%),
+    radial-gradient(100% 90% at 70% 88%, #00e5ff 0%, transparent 55%),
+    radial-gradient(60% 50% at 48% 42%, rgba(120, 20, 180, 0.4) 0%, transparent 70%),
+    linear-gradient(160deg, #050a18 0%, #0c1a3a 42%, #12102e 72%, #060d1c 100%);
+  transition: background 0.45s ease;
+}
+
+/* Light: pastel sky / peach / mint — saturated enough for blob contrast */
+.live-wallpaper--light .live-wallpaper-base {
+  background:
+    radial-gradient(120% 80% at 12% 18%, #6eb0ff 0%, transparent 55%),
+    radial-gradient(90% 70% at 88% 12%, #ff8ec8 0%, transparent 52%),
+    radial-gradient(100% 90% at 70% 88%, #5fe0c0 0%, transparent 55%),
+    radial-gradient(60% 50% at 48% 42%, rgba(255, 186, 110, 0.55) 0%, transparent 70%),
+    linear-gradient(160deg, #d6e8ff 0%, #ebe0ff 40%, #d4f5ec 72%, #ffe8cc 100%);
+}
+
+.live-wallpaper-blob {
+  border-radius: 50%;
+  filter: blur(64px);
+  opacity: 0.68;
+  mix-blend-mode: screen;
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+}
+
+.live-wallpaper-blob--a {
+  width: 62%;
+  height: 62%;
+  top: -14%;
+  left: -10%;
+  background: radial-gradient(circle, rgba(0, 220, 255, 0.85) 0%, transparent 70%);
+  animation: live-blob-a 11s ease-in-out infinite alternate;
+}
+
+.live-wallpaper-blob--b {
+  width: 52%;
+  height: 52%;
+  top: 6%;
+  right: -16%;
+  left: auto;
+  background: radial-gradient(circle, rgba(255, 40, 200, 0.75) 0%, transparent 70%);
+  animation: live-blob-b 14s ease-in-out infinite alternate;
+  filter: blur(72px);
+  opacity: 0.72;
+}
+
+.live-wallpaper-blob--c {
+  width: 64%;
+  height: 54%;
+  bottom: -20%;
+  left: 16%;
+  top: auto;
+  background: radial-gradient(circle, rgba(80, 120, 255, 0.65) 0%, transparent 70%);
+  animation: live-blob-c 12s ease-in-out infinite alternate;
+}
+
+.live-wallpaper-blob--d {
+  width: 38%;
+  height: 38%;
+  top: 36%;
+  left: 40%;
+  background: radial-gradient(circle, rgba(255, 60, 220, 0.45) 0%, transparent 70%);
+  opacity: 0.58;
+  filter: blur(48px);
+  animation: live-blob-d 15s ease-in-out infinite alternate;
+}
+
+.live-wallpaper-blob--e {
+  width: 28%;
+  height: 28%;
+  top: 18%;
+  left: 58%;
+  background: radial-gradient(circle, rgba(0, 255, 220, 0.5) 0%, transparent 70%);
+  opacity: 0.52;
+  filter: blur(40px);
+  animation: live-blob-e 9s ease-in-out infinite alternate;
+}
+
+.live-wallpaper-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+  mix-blend-mode: screen;
+  opacity: 0.95;
+  pointer-events: none;
+}
+
+.live-wallpaper-sheen {
+  background:
+    linear-gradient(
+      115deg,
+      transparent 20%,
+      rgba(160, 200, 255, 0.06) 42%,
+      transparent 58%,
+      rgba(180, 140, 255, 0.05) 72%,
+      transparent 88%
+    );
+  mix-blend-mode: soft-light;
+  opacity: 0.9;
+  animation: live-sheen 24s ease-in-out infinite alternate;
+  will-change: transform, opacity;
+}
+
+.live-wallpaper-vignette {
+  background:
+    radial-gradient(ellipse at center, transparent 38%, rgba(3, 8, 22, 0.45) 100%);
+  opacity: 0.9;
+  pointer-events: none;
+}
+
+.live-wallpaper-noise {
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+  mix-blend-mode: overlay;
+}
+
+@keyframes live-blob-a {
+  0% { transform: translate3d(0%, 0%, 0) scale(1); }
+  100% { transform: translate3d(18%, 14%, 0) scale(1.16); }
+}
+
+@keyframes live-blob-b {
+  0% { transform: translate3d(0%, 0%, 0) scale(1.05); }
+  100% { transform: translate3d(-20%, 16%, 0) scale(0.9); }
+}
+
+@keyframes live-blob-c {
+  0% { transform: translate3d(0%, 0%, 0) scale(1); }
+  100% { transform: translate3d(16%, -14%, 0) scale(1.18); }
+}
+
+@keyframes live-blob-d {
+  0% { transform: translate3d(-8%, 5%, 0) scale(0.94); }
+  100% { transform: translate3d(10%, -8%, 0) scale(1.16); }
+}
+
+@keyframes live-blob-e {
+  0% { transform: translate3d(0%, 0%, 0) scale(1); }
+  100% { transform: translate3d(-12%, 10%, 0) scale(1.2); }
+}
+
+@keyframes live-sheen {
+  0% { opacity: 0.65; transform: translate3d(0%, 0%, 0); }
+  100% { opacity: 1; transform: translate3d(5%, -4%, 0); }
+}
+
+
+/* Light-mode pastel blobs — multiply + richer midtones (soft-light washed out on white) */
+.live-wallpaper--light .live-wallpaper-blob {
+  mix-blend-mode: multiply;
+  opacity: 0.88;
+}
+.live-wallpaper--light .live-wallpaper-blob--a {
+  background: radial-gradient(circle, rgba(40, 130, 255, 0.95) 0%, transparent 70%);
+  opacity: 0.9;
+}
+.live-wallpaper--light .live-wallpaper-blob--b {
+  background: radial-gradient(circle, rgba(255, 70, 160, 0.9) 0%, transparent 70%);
+  opacity: 0.88;
+}
+.live-wallpaper--light .live-wallpaper-blob--c {
+  background: radial-gradient(circle, rgba(0, 180, 140, 0.88) 0%, transparent 70%);
+  opacity: 0.86;
+}
+.live-wallpaper--light .live-wallpaper-blob--d {
+  background: radial-gradient(circle, rgba(255, 140, 60, 0.8) 0%, transparent 70%);
+  opacity: 0.8;
+}
+.live-wallpaper--light .live-wallpaper-blob--e {
+  background: radial-gradient(circle, rgba(70, 140, 255, 0.85) 0%, transparent 70%);
+  opacity: 0.82;
+}
+
+/* multiply (not soft-light): particles/nebula stay readable on pale base */
+.live-wallpaper--light .live-wallpaper-canvas {
+  mix-blend-mode: multiply;
+  opacity: 1;
+}
+
+.live-wallpaper--light .live-wallpaper-sheen {
+  background:
+    linear-gradient(
+      115deg,
+      transparent 20%,
+      rgba(120, 170, 255, 0.22) 42%,
+      transparent 58%,
+      rgba(255, 140, 200, 0.18) 72%,
+      transparent 88%
+    );
+  mix-blend-mode: multiply;
+  opacity: 0.75;
+}
+
+.live-wallpaper--light .live-wallpaper-vignette {
+  background:
+    radial-gradient(ellipse at center, transparent 42%, rgba(90, 130, 190, 0.32) 100%);
+  opacity: 0.85;
+}
+
+.live-wallpaper--light .live-wallpaper-noise {
+  opacity: 0.045;
+  mix-blend-mode: multiply;
+}
+
+/* Dark neon accents (explicit) */
+.live-wallpaper--dark .live-wallpaper-blob {
+  mix-blend-mode: screen;
+}
+.live-wallpaper--dark .live-wallpaper-canvas {
+  mix-blend-mode: screen;
+  opacity: 0.98;
+}
+.live-wallpaper--dark .live-wallpaper-sheen {
+  background:
+    linear-gradient(
+      115deg,
+      transparent 18%,
+      rgba(0, 255, 240, 0.08) 40%,
+      transparent 55%,
+      rgba(255, 40, 200, 0.07) 70%,
+      transparent 88%
+    );
+}
+
+/* Thumb preview: tighter blur, faster loop */
+.live-wallpaper--thumb .live-wallpaper-blob {
+  filter: blur(16px);
+  opacity: 0.7;
+}
+
+.live-wallpaper--thumb .live-wallpaper-blob--d,
+.live-wallpaper--thumb .live-wallpaper-blob--e {
+  filter: blur(12px);
+}
+
+.live-wallpaper--thumb .live-wallpaper-blob--a { animation-duration: 7s; }
+.live-wallpaper--thumb .live-wallpaper-blob--b { animation-duration: 9s; }
+.live-wallpaper--thumb .live-wallpaper-blob--c { animation-duration: 8s; }
+.live-wallpaper--thumb .live-wallpaper-blob--d { animation-duration: 10s; }
+.live-wallpaper--thumb .live-wallpaper-blob--e { animation-duration: 6s; }
+
+.live-wallpaper--thumb .live-wallpaper-canvas { opacity: 0.85; }
+.live-wallpaper--thumb .live-wallpaper-sheen { animation-duration: 12s; }
+
+/* Energy saver / explicit pause — freeze CSS drift; canvas handled in JS */
+.live-wallpaper--paused .live-wallpaper-blob,
+.live-wallpaper--paused .live-wallpaper-sheen,
+[data-energy-saver] .live-wallpaper .live-wallpaper-blob,
+[data-energy-saver] .live-wallpaper .live-wallpaper-sheen {
+  animation-play-state: paused !important;
+}
+
+.live-wallpaper--paused .live-wallpaper-canvas,
+[data-energy-saver] .live-wallpaper .live-wallpaper-canvas {
+  opacity: 0.35;
+}
+
+.live-wallpaper--paused .live-wallpaper-layer,
+[data-energy-saver] .live-wallpaper .live-wallpaper-layer {
+  transform: none !important;
+}
+
+/*
+ * Soft motion when OS prefers-reduced-motion: keep gentle drift (user chose
+ * Canlı). Do NOT set animation:none / hide canvas — that made the wallpaper
+ * look fully static after hard refresh on Windows reduce-motion.
+ */
+@media (prefers-reduced-motion: reduce) {
+  .live-wallpaper:not(.live-wallpaper--paused) .live-wallpaper-blob--a {
+    animation-name: live-blob-a !important;
+    animation-duration: 28s !important;
+    animation-iteration-count: infinite !important;
+    animation-timing-function: ease-in-out !important;
+    animation-direction: alternate !important;
+    animation-play-state: running !important;
+  }
+  .live-wallpaper:not(.live-wallpaper--paused) .live-wallpaper-blob--b {
+    animation-name: live-blob-b !important;
+    animation-duration: 34s !important;
+    animation-iteration-count: infinite !important;
+    animation-timing-function: ease-in-out !important;
+    animation-direction: alternate !important;
+    animation-play-state: running !important;
+  }
+  .live-wallpaper:not(.live-wallpaper--paused) .live-wallpaper-blob--c {
+    animation-name: live-blob-c !important;
+    animation-duration: 30s !important;
+    animation-iteration-count: infinite !important;
+    animation-timing-function: ease-in-out !important;
+    animation-direction: alternate !important;
+    animation-play-state: running !important;
+  }
+  .live-wallpaper:not(.live-wallpaper--paused) .live-wallpaper-blob--d {
+    animation-name: live-blob-d !important;
+    animation-duration: 36s !important;
+    animation-iteration-count: infinite !important;
+    animation-timing-function: ease-in-out !important;
+    animation-direction: alternate !important;
+    animation-play-state: running !important;
+  }
+  .live-wallpaper:not(.live-wallpaper--paused) .live-wallpaper-blob--e {
+    animation-name: live-blob-e !important;
+    animation-duration: 26s !important;
+    animation-iteration-count: infinite !important;
+    animation-timing-function: ease-in-out !important;
+    animation-direction: alternate !important;
+    animation-play-state: running !important;
+  }
+  .live-wallpaper:not(.live-wallpaper--paused) .live-wallpaper-sheen {
+    animation-name: live-sheen !important;
+    animation-duration: 40s !important;
+    animation-iteration-count: infinite !important;
+    animation-timing-function: ease-in-out !important;
+    animation-direction: alternate !important;
+    animation-play-state: running !important;
+  }
+
+  .live-wallpaper--soft .live-wallpaper-layer--base {
+    transform: translate3d(
+      calc(var(--lw-mx) * 2px),
+      calc(var(--lw-my) * 1.5px),
+      0
+    );
+  }
+  .live-wallpaper--soft .live-wallpaper-layer--far {
+    transform: translate3d(
+      calc(var(--lw-mx) * 3.5px),
+      calc(var(--lw-my) * 2.5px),
+      0
+    );
+  }
+  .live-wallpaper--soft .live-wallpaper-layer--mid {
+    transform: translate3d(
+      calc(var(--lw-mx) * 6px),
+      calc(var(--lw-my) * 5px),
+      0
+    );
+  }
+  .live-wallpaper--soft .live-wallpaper-layer--near {
+    transform: translate3d(
+      calc(var(--lw-mx) * 9px),
+      calc(var(--lw-my) * 7px),
+      0
+    );
+  }
+  .live-wallpaper--soft .live-wallpaper-layer--sheen {
+    transform: translate3d(
+      calc(var(--lw-mx) * -5px),
+      calc(var(--lw-my) * -4px),
+      0
+    );
+  }
+
+  .live-wallpaper-canvas {
+    display: block;
+    opacity: 0.75;
+  }
+}
+
+/*
+ * Survive global energy-saver / reduced-motion collapse in index.css
+ * (same pattern as Win11 boot dots). Only when not paused.
+ */
+.live-wallpaper:not(.live-wallpaper--paused) .live-wallpaper-blob,
+.live-wallpaper:not(.live-wallpaper--paused) .live-wallpaper-sheen {
+  animation-iteration-count: infinite !important;
+  animation-fill-mode: both !important;
+}

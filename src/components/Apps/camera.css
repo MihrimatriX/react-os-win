@@ -1,0 +1,181 @@
+.camera-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  background-color: #000000;
+  color: #ffffff;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  overflow: hidden;
+  position: relative;
+  user-select: none;
+}
+
+/* 1. Camera Viewfinder Screen */
+.camera-viewfinder {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background-color: #111;
+  overflow: hidden;
+}
+
+.camera-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scaleX(-1); /* mirror effect */
+}
+
+/* Camera Target Sight Overlay */
+.camera-reticle {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  border: 1px dashed rgba(255, 255, 255, 0.4);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.camera-reticle::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  background-color: rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* 2. Mock Camera Viewfinder template */
+.camera-mock-feed {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 40px;
+  color: #aaaaaa;
+}
+
+.camera-mock-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 4px solid #0078d4;
+  margin-bottom: 20px;
+  object-fit: cover;
+}
+
+.camera-mock-warning {
+  font-size: 13px;
+  opacity: 0.8;
+  max-width: 320px;
+  margin-top: 5px;
+}
+
+/* 3. Camera Control HUD panel */
+.camera-controls-hud {
+  height: 80px;
+  background-color: rgba(20, 20, 20, 0.95);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 30px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  z-index: 10;
+}
+
+/* Thumbnail preview for last shot */
+.camera-thumbnail-preview {
+  width: 48px;
+  height: 48px;
+  border-radius: 6px;
+  border: 2px solid #ffffff;
+  background-color: #333;
+  background-size: cover;
+  background-position: center;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  transition: transform 0.2s ease;
+}
+
+.camera-thumbnail-preview:hover {
+  transform: scale(1.08);
+}
+
+/* Main circular capture button */
+.camera-shutter-btn-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.camera-shutter-btn {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  border: 4px solid #333333;
+  cursor: pointer;
+  box-shadow: 0 0 0 3px #ffffff;
+  transition: all 0.2s ease;
+  outline: none;
+}
+
+.camera-shutter-btn:hover {
+  background-color: #e0e0e0;
+  transform: scale(1.04);
+}
+
+.camera-shutter-btn:active {
+  transform: scale(0.92);
+}
+
+/* Camera Action Toggle (photo / video mode) */
+.camera-mode-toggle {
+  color: #888888;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.camera-mode-toggle.active {
+  color: #0078d4;
+  border-bottom: 2px solid #0078d4;
+  padding-bottom: 2px;
+}
+
+/* 4. Take Photo Camera Flash frame effect */
+.camera-flash-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ffffff;
+  z-index: 99;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.camera-flash-overlay.flash {
+  animation: flash-frame-anim 0.35s ease-out;
+}
+
+@keyframes flash-frame-anim {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}

@@ -1,0 +1,278 @@
+.weather-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  background: var(--bg-color);
+  color: var(--text-color);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* Search bar */
+.weather-search-bar {
+  display: flex;
+  gap: 10px;
+  padding: 15px 20px;
+  border-bottom: 1px solid var(--border-color);
+  background: rgba(0, 0, 0, 0.02);
+  flex-shrink: 0;
+}
+
+[data-theme="dark"] .weather-search-bar {
+  background: rgba(255, 255, 255, 0.01);
+}
+
+.search-input-wrapper {
+  position: relative;
+  flex: 1;
+  max-width: 400px;
+}
+
+.weather-search-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0.6;
+}
+
+.search-input-wrapper input {
+  width: 100%;
+  padding: 7px 12px 7px 36px;
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+  background: rgba(255, 255, 255, 0.6);
+  color: var(--text-color);
+  font-size: 12.5px;
+  outline: none;
+  transition: border-color 0.15s ease;
+  box-sizing: border-box;
+}
+
+[data-theme="dark"] .search-input-wrapper input {
+  background: rgba(30, 30, 30, 0.6);
+}
+
+.search-input-wrapper input:focus {
+  border-color: #0078d4;
+}
+
+[data-theme="dark"] .search-input-wrapper input:focus {
+  border-color: #60cdff;
+}
+
+.weather-search-btn {
+  padding: 0 16px;
+  border-radius: 6px;
+  border: none;
+  background: #0078d4;
+  color: #ffffff;
+  font-size: 12.5px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.weather-search-btn:hover {
+  background: #0066b3;
+}
+
+[data-theme="dark"] .weather-search-btn {
+  background: #60cdff;
+  color: #000000;
+}
+
+[data-theme="dark"] .weather-search-btn:hover {
+  background: #50bdf0;
+}
+
+/* Main panel layout */
+.weather-main-panel {
+  flex: 1;
+  display: flex;
+  padding: 20px;
+  gap: 20px;
+  overflow: hidden;
+}
+
+/* Left panel current */
+.weather-current-box {
+  width: 320px;
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  flex-shrink: 0;
+}
+
+.current-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.location-indicator {
+  font-size: 15px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+}
+
+.current-date {
+  font-size: 11px;
+  opacity: 0.6;
+}
+
+.current-temp-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.current-emoji {
+  font-size: 64px;
+}
+
+.temp-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.temp-number {
+  font-size: 38px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.temp-condition {
+  font-size: 13.5px;
+  opacity: 0.8;
+}
+
+/* Details grid */
+.weather-details-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.detail-card {
+  padding: 12px;
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.03);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+}
+
+[data-theme="dark"] .detail-card {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.detail-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.detail-text span {
+  opacity: 0.6;
+  font-size: 10.5px;
+}
+
+.detail-text strong {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* Projections side */
+.weather-projections-box {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  overflow-y: auto;
+}
+
+.hourly-panel,
+.daily-panel {
+  padding: 16px;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+}
+
+.hourly-panel h3,
+.daily-panel h3 {
+  font-size: 13px;
+  font-weight: 600;
+  margin: 0 0 15px 0;
+  opacity: 0.8;
+}
+
+.hourly-list {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  padding-bottom: 5px;
+}
+
+.hourly-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  min-width: 50px;
+}
+
+.hourly-time {
+  font-size: 11px;
+  opacity: 0.6;
+}
+
+.hourly-emoji {
+  font-size: 24px;
+}
+
+.hourly-temp {
+  font-size: 12.5px;
+  font-weight: 600;
+}
+
+.daily-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.daily-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  background: rgba(0, 0, 0, 0.02);
+  border-radius: 6px;
+  font-size: 12.5px;
+}
+
+[data-theme="dark"] .daily-item {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.daily-day {
+  width: 100px;
+}
+
+.daily-emoji {
+  font-size: 20px;
+}
+
+.daily-temp {
+  font-weight: 500;
+  opacity: 0.8;
+}

@@ -1,0 +1,240 @@
+.desktop-area {
+  width: 100vw;
+  height: calc(100dvh - var(--taskbar-height));
+  background-size: cover;
+  background-position: center;
+  position: relative; /* ponytail: anchor absolute windows to desktop, not outer shell */
+  overflow: hidden;
+  transition: background-image 0.5s ease;
+}
+
+.desktop-area--live {
+  background-image: none;
+  background-color: #0b1a3a;
+}
+
+.desktop-icons-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+/* Win11 desktop icon: single thin rounded selection around glyph + label */
+.desktop-icon-wrapper {
+  width: 96px;
+  height: 108px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: center;
+  box-sizing: border-box;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  background-color: transparent;
+  padding: 6px 4px 4px;
+  cursor: default;
+  outline: none;
+  box-shadow: none;
+  transition:
+    background-color 0.12s ease,
+    border-color 0.12s ease,
+    left 0.15s ease,
+    top 0.15s ease;
+}
+
+
+/* Selection border is the sole focus ring - avoid global 2px outline double-border
+.desktop-icon-wrapper:focus,
+.desktop-icon-wrapper:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
+.desktop-icon-wrapper.dragging {
+  transition: none;
+  opacity: 0.85;
+  transform: scale(1.04);
+  filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.28));
+}
+
+/* Hover: light acrylic wash, same single rect (no label box) */
+.desktop-icon-wrapper:hover:not(.selected) {
+  background-color: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.18);
+}
+
+[data-theme="light"] .desktop-icon-wrapper:hover:not(.selected) {
+  background-color: rgba(255, 255, 255, 0.16);
+  border-color: rgba(255, 255, 255, 0.28);
+}
+
+/* Selected: one soft blue/white acrylic fill + thin accent border */
+.desktop-icon-wrapper.selected {
+  background-color: rgba(0, 120, 212, 0.28);
+  border-color: rgba(96, 170, 255, 0.55);
+  backdrop-filter: blur(8px) saturate(140%);
+  -webkit-backdrop-filter: blur(8px) saturate(140%);
+}
+
+.desktop-icon-wrapper.selected:hover {
+  background-color: rgba(0, 120, 212, 0.34);
+  border-color: rgba(96, 170, 255, 0.65);
+}
+
+[data-theme="light"] .desktop-icon-wrapper.selected {
+  background-color: rgba(0, 120, 212, 0.22);
+  border-color: rgba(0, 120, 212, 0.42);
+}
+
+[data-theme="light"] .desktop-icon-wrapper.selected:hover {
+  background-color: rgba(0, 120, 212, 0.28);
+  border-color: rgba(0, 120, 212, 0.5);
+}
+
+.desktop-icon-visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  margin-bottom: 5px;
+  flex-shrink: 0;
+  /* Win11-like layered soft shadow under the glyph */
+  filter:
+    drop-shadow(0 1px 1px rgba(0, 0, 0, 0.18))
+    drop-shadow(0 3px 6px rgba(0, 0, 0, 0.32));
+}
+
+.desktop-icon-visual img,
+.desktop-icon-visual svg {
+  display: block;
+  shape-rendering: geometricPrecision;
+}
+
+.desktop-web-shortcut-icon {
+  width: 48px;
+  height: 48px;
+  position: relative;
+  display: grid;
+  place-items: center;
+}
+
+.desktop-web-shortcut-icon > img,
+.desktop-project-favicon {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+}
+
+.desktop-web-shortcut-icon.has-favicon .desktop-project-favicon {
+  width: 48px;
+  height: 48px;
+}
+
+.desktop-shortcut-fallback {
+  display: grid;
+  place-items: center;
+}
+
+.desktop-web-shortcut-icon.has-favicon .desktop-shortcut-fallback {
+  display: none !important;
+}
+
+.desktop-web-shortcut-icon.has-favicon .desktop-project-favicon {
+  display: block;
+}
+
+.desktop-web-shortcut-icon > img:not(.desktop-project-favicon) {
+  position: absolute;
+  inset: 5px;
+  width: 38px;
+  height: 38px;
+  object-fit: contain;
+  border-radius: 9px;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+}
+
+.desktop-shortcut-badge {
+  position: absolute;
+  right: -1px;
+  bottom: -1px;
+  width: 17px;
+  height: 17px;
+  display: grid;
+  place-items: center;
+  color: #0b5cab;
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+}
+
+/* Label lives inside the same selection rect — no separate filled box */
+.desktop-icon-label {
+  font-size: 12px;
+  color: #ffffff;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  text-shadow:
+    0 0 3px rgba(0, 0, 0, 0.95),
+    0 1px 2px rgba(0, 0, 0, 0.9),
+    0 2px 6px rgba(0, 0, 0, 0.55);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  word-break: break-word;
+  line-height: 1.25;
+  max-width: 88px;
+  padding: 1px 3px;
+  border-radius: 0;
+  background-color: transparent;
+}
+
+.desktop-icon-wrapper.selected .desktop-icon-label,
+.desktop-icon-wrapper:hover .desktop-icon-label {
+  background-color: transparent;
+  /* Keep legible shadow only - no fill box (Win11 single selection rect) */
+  text-shadow:
+    0 0 2px rgba(0, 0, 0, 0.85),
+    0 1px 2px rgba(0, 0, 0, 0.75);
+}
+
+[data-theme="light"] .desktop-icon-label {
+  /* Keep white + strong shadow so labels stay legible on light wallpapers */
+  text-shadow:
+    0 0 3px rgba(0, 0, 0, 0.95),
+    0 1px 2px rgba(0, 0, 0, 0.9),
+    0 2px 6px rgba(0, 0, 0, 0.55);
+}
+
+.desktop-selection-marquee {
+  background-color: rgba(0, 120, 212, 0.18);
+  border: 1px solid rgba(0, 120, 212, 0.45);
+  pointer-events: none;
+  z-index: 99;
+}
+
+.desktop-area.refreshing .desktop-icon-wrapper {
+  animation: desktop-refresh-anim 0.3s ease;
+}
+
+@keyframes desktop-refresh-anim {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.1;
+    transform: scale(0.97);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

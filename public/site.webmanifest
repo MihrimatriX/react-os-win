@@ -1,0 +1,25 @@
+{
+  "name": "Win 11",
+  "short_name": "Win 11",
+  "description": "Tarayıcıda çalışan Windows 11 masaüstü simülasyonu.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "fullscreen",
+  "background_color": "#000000",
+  "theme_color": "#0078D4",
+  "lang": "tr",
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

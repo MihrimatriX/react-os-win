@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="Ecrin Su Aritma">
+  <rect width="32" height="32" rx="8" fill="#0d5299"/>
+  <path
+    fill="#ffffff"
+    d="M16 6c-4.2 5.8-7 9.8-7 14a7 7 0 0 0 14 0c0-4.2-2.8-8.2-7-14Z"
+  />
+</svg>
